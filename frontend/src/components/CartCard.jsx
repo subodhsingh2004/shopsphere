@@ -6,7 +6,7 @@ import { removeProductsOfCart, updateProductInCart } from '../services/cartApi.j
 import { useDispatch, useSelector } from 'react-redux';
 import { removeProductOfCart, updateProduct } from '../slices/cartSlice.js';
 
-function CartCard({ productId, productName, quantity, productPrice, func }) {
+function CartCard({ productId, productName, productImage, quantity, productPrice, func }) {
 
     const dispatch = useDispatch()
 
@@ -43,7 +43,7 @@ function CartCard({ productId, productName, quantity, productPrice, func }) {
 
             <div className="h-full flex flex-1 items-center px-2 md:px-4 justify-between">
                 <div className='flex space-x-2 md:space-x-4 items-center'>
-                    <img src="/iphone-16-pro.png" alt="" className="h-[60px] sm:h-[70px]" />
+                    <img src={productImage} alt="" className="h-[60px] sm:h-[70px]" />
                     <h1 className="font-[poppins] text-xs sm:text-sm lg:text-[16px] dark:text-white">{productName}</h1>
                 </div>
                 <div>

@@ -14,7 +14,7 @@ function Personal() {
 
     const [pinCode, setPinCode] = useState(userDetails.address?.pinCode || "")
     const [streetAddress, setStreetAddress] = useState(userDetails.address?.street || "")
-    const [city, setCity] = useState("")
+    const [city, setCity] = useState(userDetails.address?.city || "")
     const [state, setState] = useState(userDetails.address?.state || "")
 
     const [editStatus, setEditStatus] = useState(false)

@@ -28,7 +28,7 @@ function Navbar() {
     const [products, setProducts] = useState([])
 
     const getCartProducts = async () => {
-        const productLists = await getProductsOfCart()
+        const productLists = await getProductsOfCart(userDetails._id)
         setProducts(productLists.data)
         dispatch(setProductsInCart(productLists.data))
     }

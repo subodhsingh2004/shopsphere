@@ -21,7 +21,7 @@ function Herosection() {
           <div className='absolute w-auto h-auto rounded-sm p-1 bg-[#f8d525] top-4 lg:top-16 left-4 lg:left-6 z-10 text-[14px] font-bold font-[poppins]'>Most Selling</div>
 
           <div className='relative flex flex-col md:flex-row md:justify-between items-center'>
-            <img src="/m4macmini.png" alt="" className='absoulte w-[250px] h-[250px] lg:w-[350px] lg:h-[350px] rounded-xl' />
+            <img src="https://res.cloudinary.com/filedatabase/image/upload/v1741873401/m4macmini_emvlmm.png" alt="" className='absoulte w-[250px] h-[250px] lg:w-[350px] lg:h-[350px] rounded-xl' />
 
             <div className='w-full mt-[-60px] md:mt-0 h-full flex flex-col md:pr-8 justify-center md:items-end space-y-4'>
               <div className="flex flex-col items-center space-y-4">

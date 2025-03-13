@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: '/api/v1/user'
+    baseURL: 'http://localhost:3000/api/v1/user'
 })
 
 export const userSignup = async (username, email, password) => {

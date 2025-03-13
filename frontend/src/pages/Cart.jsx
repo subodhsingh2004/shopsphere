@@ -2,14 +2,20 @@ import { useSelector } from "react-redux"
 import CartCard from "../components/CartCard"
 import { getProductsOfCart } from "../services/cartApi.js"
 import { useEffect, useMemo, useState } from "react"
+import { setProductsInCart } from "../slices/cartSlice.js"
 
 function Cart() {
 
   const products = useSelector(state => state.cart.products)
+  const user = useSelector(state => state.user.userDetails)
+
   const [productsPrice, setProductsPrice] = useState(0)
 
   const getProducts = async () => {
-    const productLists = await getProductsOfCart()
+    if (user._id != undefined) {
+      const productLists = await getProductsOfCart(user._id)
+      if (productLists.data) setProductsInCart(productLists.data)
+    }
     // console.log(productLists.data.cart[0].quantity)
     // setProducts(productLists.data)
   }
@@ -22,12 +28,12 @@ function Cart() {
     products.map((product) => (
       total += product.price * product.quantity
     ))
-
+c
     setProductsPrice(total)
   }, [products])
 
 
-  useEffect(() => {
+  useEffect(() => { 
     getProducts()
   }, [])
 
@@ -55,13 +61,13 @@ function Cart() {
           <div className="w-full max-h-auto flex-col items-center overflow-y-scroll" style={{ scrollbarWidth: "none" }}>
             {
               products.map((product) => (
-                <CartCard key={product._id} func={onQuantityChange} productId={product._id} productName={product.name} productPrice={product.price} quantity={product.quantity} />
+                <CartCard key={product._id} func={onQuantityChange} productImage={product.image} productId={product._id} productName={product.name} productPrice={product.price} quantity={product.quantity} />
               ))
             }
           </div>
 
         </div>
-          
+
         {/* OrderSummary Box */}
         <div className="h-full lg:w-[30%] w-full flex flex-col space-y-4 md:space-y-8 justify-between font-[poppins]">
           <div className="bg-white dark:bg-[#141414] border border-gray-200 dark:border-none shadow-xl h-[40vh] md:h-full w-full rounded-xl p-4">
@@ -75,7 +81,7 @@ function Cart() {
 
               <div className="flex w-full justify-between">
                 <p className="text-[14px] text-gray-500">Shipping charges</p>
-                <span className="dark:text-white">{ productsPrice<499 && productsPrice > 0 ? 50 : 0 }</span>
+                <span className="dark:text-white">{productsPrice < 499 && productsPrice > 0 ? 50 : 0}</span>
               </div>
 
               <div className="flex w-full justify-between">
@@ -85,7 +91,7 @@ function Cart() {
 
               <div className="flex w-full justify-between border-t border-gray-200 dark:border-gray-600 mt-2 pt-1">
                 <p className="text-[16px] dark:text-white font-medium">Total</p>
-                <span className="text-[16px] dark:text-white font-medium">₹{ productsPrice<499 && productsPrice > 0 ? productsPrice+50 : productsPrice }</span>
+                <span className="text-[16px] dark:text-white font-medium">₹{productsPrice < 499 && productsPrice > 0 ? productsPrice + 50 : productsPrice}</span>
               </div>
             </div>
 
@@ -93,7 +99,7 @@ function Cart() {
 
           <button className="w-full flex justify-between px-6 bg-[#3772ff] hover:bg-[#275ad2] rounded-full font-medium  text-xl text-white py-3">
             <p>Checkout</p>
-            <span className="">₹ { productsPrice<499 && productsPrice > 0 ? productsPrice+50 : productsPrice }</span>
+            <span className="">₹ {productsPrice < 499 && productsPrice > 0 ? productsPrice + 50 : productsPrice}</span>
           </button>
         </div>
 

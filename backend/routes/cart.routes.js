@@ -4,7 +4,7 @@ import { addProductToCart, getProductsOfCart, removeProductsOfCart, updateProduc
 const router = Router();
 
 router.route('/add-to-cart').post(addProductToCart)
-router.route('/get-cart-products').get(getProductsOfCart)
+router.route('/get-cart-products/:userId').get(getProductsOfCart)
 router.route('/update-cart-products').patch(updateProductsOfCart)
 router.route('/remove-cart-products').delete(removeProductsOfCart)
 

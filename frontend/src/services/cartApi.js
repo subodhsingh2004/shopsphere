@@ -1,13 +1,15 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'api/v1/cart'
+    baseURL: 'http://localhost:3000/api/v1/cart'
 })
 
-export const getProductsOfCart = async () => {
+export const getProductsOfCart = async (userId) => {
     try {
-        const products = api.get('get-cart-products')
-        return products
+        if (userId) {
+            const products = api.get(`get-cart-products/${userId}`)
+            return products
+        }
     } catch (error) {
         throw error
     }

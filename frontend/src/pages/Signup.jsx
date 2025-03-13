@@ -1,11 +1,15 @@
 import { userSignup, userSignupVerification } from "../services/authApi.js"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import Loader from "../components/Loader.jsx"
 import OtpInput from "../components/OtpInput.jsx"
+import { login } from "../slices/userSlice.js"
 
 function Signup() {
+
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
     const [username, setUsername] = useState("TestUser")
@@ -44,8 +48,9 @@ function Signup() {
 
             if (response) {
                 setLoadingStatus(false)
-                
+
                 toast.success("Registered successfully")
+                dispatch(login(response.data))
                 navigate('/')
             }
         } catch (error) {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import { getSingleProduct } from "../services/productApi"
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -9,13 +10,21 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ReviewCard from "../components/ReviewCard";
 import { getReviews } from "../services/reviewApi";
 import ReviewForm from "../components/ReviewForm";
+import { toast } from "react-toastify"
+import { addProductToCart } from "../services/cartApi";
+import { addProductInCart } from "../slices/cartSlice";
 
 
 const ProductPage = () => {
 
+    const dispatch = useDispatch()
+    const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+    const user = useSelector(state => state.user.userDetails)
+
     const { productId } = useParams()
     const [product, setProduct] = useState()
     const [reviews, setReviews] = useState([])
+    const [reviewFormStatus, setReviewFormStatus] = useState(false)
     const stars = [];
     const [selectedQuantity, setSelectedQuantity] = useState(1)
 
@@ -72,6 +81,14 @@ const ProductPage = () => {
 
         if (totalRating > 0) return totalRating / reviews.length
         else return 0;
+    }
+
+    const addToCart = async () => {
+        if (!isLoggedIn) toast.error("Please login")
+        else {
+            const response = await addProductToCart(productId, user._id)
+            dispatch(addProductInCart(response.data?.product))
+        }
     }
 
     useEffect(() => {
@@ -150,7 +167,7 @@ const ProductPage = () => {
                             </div>
                             {/* Buttons */}
                             <div className="flex justify-between space-x-4 mt-10">
-                                <button className="w-1/2 py-3 bg-[#ffd400] rounded-md font-medium">Add to cart</button>
+                                <button onClick={addToCart} className="w-1/2 cursor-pointer py-3 bg-[#ffd400] rounded-md font-medium">Add to cart</button>
                                 <button className="w-1/2 py-3 text-white bg-[#3772ff] rounded-md font-medium">Buy now</button>
                             </div>
                         </div>
@@ -220,7 +237,7 @@ const ProductPage = () => {
                                                     </div>
                                                 </div>
                                                 <span className="text-sm text-gray-500">({reviews.length} reviews)</span>
-                                                <button className="py-2 px-4 rounded-md cursor-pointer bg-[#919eab14] hover:bg-[#919eab42] text-sm font-medium">
+                                                <button onClick={() => setReviewFormStatus(true)} className="py-2 px-4 rounded-md cursor-pointer bg-[#919eab14] hover:bg-[#919eab42] text-sm font-medium">
                                                     Write your review
                                                 </button>
                                             </div>
@@ -255,7 +272,7 @@ const ProductPage = () => {
                     </div>
 
                 </div>
-                <ReviewForm isActive={true} />
+                <ReviewForm isActive={reviewFormStatus} closeFunction={setReviewFormStatus} />
             </>
         )
     }

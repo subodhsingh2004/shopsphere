@@ -21,6 +21,7 @@ const userSchema = new Schema({
     phoneNumber: {
         type: String,
         unique: [true, "Phone number should be unique"],
+        default: ""
     },
     password: {
         type: String,
@@ -45,6 +46,7 @@ const userSchema = new Schema({
     cart: [
         {
             name: { type: String },
+            image: {type: String},
             price: { type: Number },
             quantity: { type: Number }
         }
