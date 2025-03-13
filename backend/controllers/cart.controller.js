@@ -54,8 +54,6 @@ const getProductsOfCart = asyncHandler(async function (req, res) {
 const updateProductsOfCart = asyncHandler(async function (req, res) {
     const { userId, productId, quantity } = req.body;
 
-    console.log(quantity)
-
     const user = await User.findById(userId).select("cart");
     if (!user) {
         throw new ApiError(404, "User not found")

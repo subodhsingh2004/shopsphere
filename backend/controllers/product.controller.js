@@ -22,7 +22,6 @@ const getAllProducts = asyncHandler(async function (req, res) {
 const getProductsByCategory = asyncHandler(async function (req, res) {
 
     const { category } = req.params
-    console.log(category)
     if (!category) throw new ApiError(401, "Category cannot be undefined")
 
     const products = await Product.find({ category: category })

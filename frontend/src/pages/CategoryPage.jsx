@@ -33,13 +33,13 @@ function CategoryPage() {
 
   return (
 
-    <div className='w-full h-[91vh] dark:bg-black relative top-[9vh] flex justify-center font-[poppins] py-8'>
+    <div className='w-full min-h-[91vh] dark:bg-black relative top-[9vh] flex justify-center font-[poppins] py-8'>
       {
         product.length > 0 ?
           <div className='w-full lg:w-[80%] flex flex-col gap-4'>
 
-            <h1 className='text-xl font-medium'>Showing category : {category}</h1>
-            <div className='w-full h-full flex'>
+            <h1 className='text-xl font-medium text-center md:text-start'>Showing category : {category}</h1>
+            <div className='w-full h-full flex justify-center md:justify-start'>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {
                   product.map(product =>

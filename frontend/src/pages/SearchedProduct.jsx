@@ -176,7 +176,7 @@ function SearchedProduct() {
                             filterProducts.length > 0 ?
                                 <div className='flex h-auto items-center justify-center mt-6'>
 
-                                    <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6'>
+                                    <div className='grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
                                         {
                                             filterProducts.map(p => (
                                                 <ProductCard key={p._id} product_id={p._id} productName={p.name} productImage={p.image} productPrice={p.price} />

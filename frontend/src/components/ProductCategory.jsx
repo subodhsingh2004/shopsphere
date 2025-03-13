@@ -7,7 +7,7 @@ function ProductCategory() {
 
         <h2 className="text-black dark:text-[#ffe66b] font-[poppins] text-[28px] md:text-[50px] font-bold text-center leading-7">Shop by Category</h2>
 
-        <div className="flex flex-row flex-wrap items-center justify-center w-full gap-5">
+        <div className="flex flex-row flex-wrap items-center justify-center w-full gap-3 md:gap-5">
 
           <Link to={`/shop-by-category/?category=Men`}>
             <div className="flex justify-center items-center bg-[url('https://res.cloudinary.com/filedatabase/image/upload/v1741873053/mencategory_onpab5.jpg')] border border-gray-200 dark:border-[#212121] w-[100px] h-[120px] md:w-[200px] md:h-[220px] rounded-md cursor-pointer bg-center bg-cover backdrop-blur">

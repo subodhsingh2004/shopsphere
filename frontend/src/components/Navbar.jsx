@@ -5,6 +5,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 import useTheme from '../contexts/Theme.js';
 import { getProductsOfCart } from '../services/cartApi.js';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +27,7 @@ function Navbar() {
     const { lightTheme, darkTheme } = useTheme()
     const [theme, setTheme] = useState("light")
     const [products, setProducts] = useState([])
+    const [searchBarStatus, setSearchBarStatus] = useState(false)
 
     const getCartProducts = async () => {
         const productLists = await getProductsOfCart(userDetails._id)
@@ -115,23 +117,41 @@ function Navbar() {
                 </div>
             </nav>
 
-            <nav className='fixed z-20 w-full h-[8vh] bg-white shadow-xl dark:shadow-none dark:bg-[#000] sm:hidden flex items-center px-2 justify-between dark:border-b dark:border-b-gray-500'>
-                <h1 className='font-[cookie] text-[30px] text-[#3772ff]'>Shop<span className='text-[#f8d525]'>Sphere</span></h1>
-                <div className='flex space-x-2'>
-                    <ul className='flex items-center space-x-1'>
-                        <li>
-                            <button onClick={onChangeBtn}>
-                                <SearchIcon sx={{ color: "#121212", fontSize: "28px" }} />
-                            </button>
-                        </li>
+            <nav className='fixed z-20 w-full h-[8vh] bg-white shadow-xl dark:shadow-none dark:bg-[#000] sm:hidden flex items-center px-2 justify-center dark:border-b dark:border-b-gray-500'>
 
-                        <li>
-                            <button onClick={onChangeBtn}>
-                                <AccountCircleIcon sx={{ color: "#3772ff", fontSize: "32px" }} />
-                            </button>
-                        </li>
-                    </ul>
+                <div className={`w-full h-full transition-all duration-300 space-x-2 pr-2 flex items-center justify-center bg-white absolute ${searchBarStatus ? "top-0" : "top-[-8vh]"} `}>
+
+                    <form onSubmit={handleSearch} className='flex w-full items-center justify-center'>
+                        <input type="text" onChange={handleInputChange} className='rounded-full w-full px-2 text-gray-600 dark:text-white font-[dmsans] outline-none h-[6vh] font-medium'
+                            placeholder={searchQuery.trim() === "" ? "Search" : ""} value={searchQuery} />
+
+                        <button className='bg-[#ffd400] cursor-pointer h-[6vh] w-[7vh] rounded-full flex justify-center items-center'><SearchIcon sx={{ fontSize: 24 }} /></button>
+                    </form>
+
+                    <button onClick={() => setSearchBarStatus(false)}><CloseIcon /></button>
                 </div>
+
+                <div className='w-full flex justify-between'>
+                    <Link to={'/'}>
+                        <h1 className='font-[cookie] text-[30px] text-[#3772ff]'>Shop<span className='text-[#f8d525]'>Sphere</span></h1>
+                    </Link>
+                    <div className='flex space-x-2'>
+                        <ul className='flex items-center space-x-1'>
+                            <li>
+                                <button onClick={() => setSearchBarStatus(true)}>
+                                    <SearchIcon sx={{ color: "#121212", fontSize: "28px" }} />
+                                </button>
+                            </li>
+
+                            <li>
+                                <button onClick={() => navigate(`/profile/${userDetails?._id}`)}>
+                                    <AccountCircleIcon sx={{ color: "#3772ff", fontSize: "32px" }} />
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             </nav>
 
             {/* <footer className='fixed z-20 bottom-0 w-full h-[8vh] bg-white shadow-lg dark:shadow-none dark:bg-[#000] sm:hidden flex items-center px-2 justify-between dark:border-t dark:border-t-gray-500 rounded-t-3xl'>

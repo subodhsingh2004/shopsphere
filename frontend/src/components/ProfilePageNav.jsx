@@ -27,8 +27,8 @@ function ProfilePageNav() {
         }
     }
     return (
-        <div className='h-full w-auto flex items-center flex-col md:flex-row'>
-            <div className='md:h-[500px] w-[280px] dark:bg-[#191919] flex flex-col items-center border border-gray-200 dark:border-[#414141] rounded-2xl'>
+        <div className='h-full w-full md:w-auto flex items-center flex-col md:flex-row'>
+            <div className='md:h-[500px] w-full md:w-[280px] dark:bg-[#191919] flex flex-col items-center border border-gray-200 dark:border-[#414141] rounded-2xl'>
                 {/* Profile */}
                 <div className='w-full flex flex-col items-center py-6 space-y-3 border-b border-b-gray-200 dark:border-b-[#414141]'>
                     {/* Profile Image */}
