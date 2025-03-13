@@ -8,7 +8,7 @@ dotenv.config()
 const app = express();
 
 app.use(cors({
-    origin: 'https://shopsphere-rdpg.onrender.com/',
+    origin: 'https://shopsphere-rdpg.onrender.com',
     credentials: true
 }))
 
