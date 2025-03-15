@@ -3,6 +3,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
@@ -10,6 +11,7 @@ import useTheme from '../contexts/Theme.js';
 import { getProductsOfCart } from '../services/cartApi.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProductsInCart } from '../slices/cartSlice.js';
+import { toast } from 'react-toastify'
 // import HomeIcon from '@mui/icons-material/Home';
 
 function Navbar() {
@@ -28,6 +30,7 @@ function Navbar() {
     const [theme, setTheme] = useState("light")
     const [products, setProducts] = useState([])
     const [searchBarStatus, setSearchBarStatus] = useState(false)
+    const [mobileNavStatus, setMobileNavStatus] = useState(false)
 
     const getCartProducts = async () => {
         const productLists = await getProductsOfCart(userDetails._id)
@@ -61,6 +64,22 @@ function Navbar() {
             lightTheme()
             setTheme('light')
         }
+    }
+
+    const handleProfileClick = () => {
+        if (isLoggedIn) {
+            setMobileNavStatus(false)
+            navigate(`/profile/${userDetails?._id}`)
+        }
+        else toast.error("Please login!")
+    }
+    
+    const handleCartClick = () => {
+        if (isLoggedIn) {
+            setMobileNavStatus(false)
+            navigate(`/cart`)
+        }
+        else toast.error("Please login!")
     }
 
     return (
@@ -143,9 +162,14 @@ function Navbar() {
                                 </button>
                             </li>
 
-                            <li>
-                                <button onClick={() => navigate(`/profile/${userDetails?._id}`)}>
+                            {/* <li>
+                                <button onClick={handleProfileClick}>
                                     <AccountCircleIcon sx={{ color: "#3772ff", fontSize: "32px" }} />
+                                </button>
+                            </li> */}
+                            <li>
+                                <button onClick={() => setMobileNavStatus(true)}>
+                                    <MenuIcon sx={{ color: "#3772ff", fontSize: "32px" }} />
                                 </button>
                             </li>
                         </ul>
@@ -153,6 +177,43 @@ function Navbar() {
                 </div>
 
             </nav>
+
+            <div className={`w-[80%] z-50 h-screen transition-all duration-300 border-l border-gray-200 dark:border-[#212121] fixed bg-white dark:bg-[#141414] ${mobileNavStatus ? "right-0" : "right-[-80%]"} font-[poppins] flex flex-col justify-between`}>
+
+                <div>
+                    <div className='w-full flex justify-between items-center border-b border-gray-200 dark:border-[#212121] px-3 py-2'>
+                        <button onClick={onChangeBtn}>
+                            {theme == 'dark' ? <LightModeIcon sx={{ color: "#fff", fontSize: "32px" }} /> : <DarkModeIcon sx={{ color: "#000", fontSize: "32px" }} />}
+                        </button>
+                        <button onClick={() => setMobileNavStatus(false)} className='dark:text-white'>
+                            <CloseIcon sx={{ fontSize: "30px" }} />
+                        </button>
+                    </div>
+
+                    <div className='p-4 w-full flex flex-col '>
+                        <div className='w-full'>
+                            <button onClick={handleProfileClick} className='space-x-2   border-gray-200 rounded-md px-1 w-full flex items-center py-2'>
+                                <AccountCircleIcon sx={{ color: "#3772ff", fontSize: "34px" }} />
+                                <span className='dark:text-white'>Profile</span>
+                            </button>
+                        </div>
+                        <div className='w-full'>
+                            <button onClick={handleCartClick} className='space-x-2 border-gray-200 rounded-md px-1 w-full flex items-center py-2'>
+                                <ShoppingCartIcon sx={{ color: "#ffd400", fontSize: "34px" }} />
+                                <span className='dark:text-white'>Cart</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='w-full p-4'>
+                    {
+                        isLoggedIn ?
+                            <button className='w-full bg-[#3772ff] text-white font-medium rounded-md py-2 text-lg'>Logout</button> :
+                            <button onClick={() => navigate('/login')} className='w-full bg-[#3772ff] text-white font-medium rounded-md py-2 text-lg'>Login</button>
+                    }
+                </div>
+            </div>
 
             {/* <footer className='fixed z-20 bottom-0 w-full h-[8vh] bg-white shadow-lg dark:shadow-none dark:bg-[#000] sm:hidden flex items-center px-2 justify-between dark:border-t dark:border-t-gray-500 rounded-t-3xl'>
                 <ul className='flex w-full justify-evenly items-center'>

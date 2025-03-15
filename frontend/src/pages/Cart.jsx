@@ -28,12 +28,12 @@ function Cart() {
     products.map((product) => (
       total += product.price * product.quantity
     ))
-c
+
     setProductsPrice(total)
   }, [products])
 
 
-  useEffect(() => { 
+  useEffect(() => {
     getProducts()
   }, [])
 
@@ -42,7 +42,7 @@ c
   }
 
   return (
-    <div className='w-full h-auto lg:h-[91vh] relative top-[8vh] md:top-[9vh] dark:bg-black px-4 md:px-[10%] py-10 flex flex-col space-y-5 bg-white'>
+    <div className='w-full h-auto lg:h-[91vh] relative top-[8vh] md:top-[9vh] dark:bg-black px-6 md:px-[10%] py-10 flex flex-col space-y-5 bg-white'>
 
       <h2 className="font-[poppins] font-medium text-2xl dark:text-white leading-none">Your Cart</h2>
 
@@ -52,19 +52,26 @@ c
 
         <div className="w-full flex flex-col shadow-xl border border-gray-200 dark:border-gray-600 lg:w-[70%] h-[50vh] md:min-h-full rounded-xl">
 
-          <div className="w-full h-[4vh] md:h-[6vh] border-b border-gray-200 dark:border-gray-600 flex items-center font-dmsans font-medium text-[16px] dark:text-white md:text-[20px]">
+          <div className="w-full h-[6vh] md:h-[6vh] border-b border-gray-200 dark:border-gray-600 flex items-center font-dmsans font-medium text-[16px] dark:text-white md:text-[20px]">
             <p className="flex-1 text-sm text-center">Items</p>
             <p className="hidden sm:block sm:w-[15%] text-center text-sm border-l border-r border-gray-200 dark:border-gray-600 h-full leading-[4vh] md:leading-[6vh]">Quantity</p>
             <p className="hidden sm:block sm:w-[15%] text-center text-sm">Price</p>
           </div>
 
-          <div className="w-full max-h-auto flex-col items-center overflow-y-scroll" style={{ scrollbarWidth: "none" }}>
-            {
-              products.map((product) => (
-                <CartCard key={product._id} func={onQuantityChange} productImage={product.image} productId={product._id} productName={product.name} productPrice={product.price} quantity={product.quantity} />
-              ))
-            }
-          </div>
+          {
+            products.length > 0 ?
+              <div className="w-full max-h-auto flex-col items-center overflow-y-scroll" style={{ scrollbarWidth: "none" }}>
+                {
+                  products.map((product) => (
+                    <CartCard key={product._id} func={onQuantityChange} productImage={product.image} productId={product._id} productName={product.name} productPrice={product.price} quantity={product.quantity} />
+                  ))
+                }
+              </div> :
+              <div className="w-full h-full flex flex-col justify-center items-center font-[poppins]">
+                <span className="sm:text-lg dark:text-white">No items in your cart !</span>
+                <p className=" text-xs sm:text-sm text-gray-400">Start shopping to add items to your cart</p>
+              </div>
+          }
 
         </div>
 
