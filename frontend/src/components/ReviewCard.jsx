@@ -41,10 +41,10 @@ function ReviewCard({ username, rating, comment, createdAt }) {
 
             <div className='space-x-2 md:space-x-0 md:space-y-1 flex md:flex-col items-center justify-start md:justify-center w-full md:w-1/4'>
                 {/* Picture */}
-                <div className='w-[50px] h-[50px] rounded-full bg-[#ffd400] flex items-center justify-center font-medium text-2xl'>{username.charAt(0)}</div>
+                <div className='w-[50px] h-[50px] rounded-full bg-[#ffd400] flex items-center justify-center font-medium text-2xl'>{username?.charAt(0)}</div>
                 <div className='leading-none flex flex-col md:items-center'>
                     {/* Name */}
-                    <h1 className='text-sm font-medium'>{username}</h1>
+                    <h1 className='text-sm font-medium'>{username || "a"}</h1>
                     {/* Date */}
                     <div className='flex flex-col'>
                         <span className='text-xs text-[#637381]'>{formattedDate}</span>

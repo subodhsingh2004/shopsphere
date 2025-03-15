@@ -56,6 +56,7 @@ const ProductPage = () => {
         try {
             const response = await getReviews(productId)
             if (response.data) {
+                console.log(response.data.reviews)
                 setReviews(response.data.reviews)
             }
         } catch (error) {
@@ -251,7 +252,7 @@ const ProductPage = () => {
                                                     reviews.map(review =>
                                                         <ReviewCard
                                                             key={review._id}
-                                                            username={review.user.username}
+                                                            username={review.user?.username}
                                                             rating={review.rating}
                                                             comment={review.comment}
                                                             createdAt={review.createdAt}
