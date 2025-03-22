@@ -30,6 +30,7 @@ import CategoryPage from './pages/CategoryPage.jsx'
 import AuthLayout from '../src/components/AuthLayout.jsx'
 import AdminAuthLayout from '../src/components/AdminAuthLayout.jsx'
 import UserOrders from './pages/profile/UserOrders.jsx'
+import OrderCompletePage from './pages/OrderCompletePage.jsx'
 
 
 const router = createBrowserRouter(
@@ -75,6 +76,8 @@ const router = createBrowserRouter(
           </AuthLayout>} />
 
         </Route>
+
+        <Route path='/order-success/:orderId' element={<OrderCompletePage />} />
 
         <Route path='/admin' element={<AdminAuthLayout authentication>
           {" "}

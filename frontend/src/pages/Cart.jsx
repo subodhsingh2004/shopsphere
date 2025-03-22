@@ -70,6 +70,7 @@ function Cart() {
       navigate(`/profile/${user._id}`)
       return
     }
+    
     navigate('/checkout', {
       state: {
         products: products,

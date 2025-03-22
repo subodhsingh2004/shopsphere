@@ -86,7 +86,7 @@ const paymentVerification = asyncHandler(async function (req, res) {
     })
 
     user.cart = []
-    
+
     await user.save({ validateBeforeSave: false })
 
     // send the order confirmation email to the user
@@ -97,7 +97,9 @@ const paymentVerification = asyncHandler(async function (req, res) {
         order.save({ validateBeforeSave: false })
     }
 
-    res.redirect("https://shopsphere-80d1.onrender.com")
+    // res.redirect(`/order-success/${order._id}`)  this is for development
+    res.redirect(`https://shopsphere-80d1.onrender.com/order-success/${order._id}`)
+    res.status(200).json(order)
 })
 
 const addNewOrder = asyncHandler(async function (req, res) {
@@ -136,4 +138,19 @@ const getAllOrder = asyncHandler(async function (req, res) {
     return res.status(200).json(orders)
 })
 
-export { checkout, paymentVerification, addNewOrder, getAllOrder }
+const generateReceipt = asyncHandler(async function (req, res) {
+    const { orderId } = req.params
+
+    // find the order
+    const order = await Order.findOne({ _id: orderId }).populate("customer", "username email phoneNumber")
+    .populate("items.productId", "name price image")
+
+    if (!order) {
+        return new ApiError(404, "Order not found")
+    }
+
+    res.status(200).json(order)
+
+})
+
+export { checkout, paymentVerification, addNewOrder, getAllOrder, generateReceipt }
