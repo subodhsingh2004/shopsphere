@@ -162,9 +162,7 @@ function Navbar() {
                 </div>
 
                 <div className='w-full flex justify-between'>
-                    <Link to={'/'}>
-                        <h1 className='font-[cookie] text-[30px] text-[#3772ff]'>Shop<span className='text-[#f8d525]'>Sphere</span></h1>
-                    </Link>
+                        <button onClick={handleLogoClick} className='font-[cookie] text-[30px] text-[#3772ff]'>Shop<span className='text-[#f8d525]'>Sphere</span></button>
                     <div className='flex space-x-2'>
                         <ul className='flex items-center space-x-1'>
                             <li>
