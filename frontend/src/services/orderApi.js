@@ -6,7 +6,7 @@ const api = axios.create({
 
 export const userOrder = async (orderId) => {
     try {
-        const response = api.get(`/generate-receipt//${orderId}`)
+        const response = api.get(`/generate-receipt/${orderId}`)
         return response
     } catch (error) {
         throw error
