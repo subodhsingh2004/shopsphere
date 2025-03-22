@@ -97,7 +97,7 @@ const paymentVerification = asyncHandler(async function (req, res) {
         order.save({ validateBeforeSave: false })
     }
 
-    res.redirect("https://shopsphere-rdpg.onrender.com/")
+    res.redirect("https://shopsphere-80d1.onrender.com")
 })
 
 const addNewOrder = asyncHandler(async function (req, res) {
