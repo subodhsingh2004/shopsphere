@@ -12,6 +12,7 @@ import { getProductsOfCart } from '../services/cartApi.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProductsInCart } from '../slices/cartSlice.js';
 import { toast } from 'react-toastify'
+import { userLogout } from '../services/authApi.js';
 // import HomeIcon from '@mui/icons-material/Home';
 
 function Navbar() {
@@ -93,6 +94,10 @@ function Navbar() {
         }
     }
 
+    const handleLogout = async () => {
+        const response = await userLogout()
+        toast.info("Logout successfully")
+    }
     return (
         <>
             <nav className='hidden fixed z-10 w-full h-[9vh] bg-white shadow-xl dark:shadow-none dark:bg-gradient-to-b from-black to-[#222] sm:flex items-center px-8 justify-between'>
@@ -218,7 +223,7 @@ function Navbar() {
                 <div className='w-full p-4'>
                     {
                         isLoggedIn ?
-                            <button className='w-full bg-[#3772ff] text-white font-medium rounded-md py-2 text-lg'>Logout</button> :
+                            <button onClick={handleLogout} className='w-full bg-[#3772ff] text-white font-medium rounded-md py-2 text-lg'>Logout</button> :
                             <button onClick={() => navigate('/login')} className='w-full bg-[#3772ff] text-white font-medium rounded-md py-2 text-lg'>Login</button>
                     }
                 </div>
