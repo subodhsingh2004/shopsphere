@@ -17,8 +17,6 @@ function OrderCompletePage() {
     }
 
     const receiptGenerator = () => {
-        console.log("generate")
-
         const doc = new jsPDF();
 
         // Set up fonts and sizes

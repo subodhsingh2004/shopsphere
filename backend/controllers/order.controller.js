@@ -97,7 +97,7 @@ const paymentVerification = asyncHandler(async function (req, res) {
         order.save({ validateBeforeSave: false })
     }
 
-    // res.redirect(`/order-success/${order._id}`)  this is for development
+    // res.redirect(`/order-success/${order._id}`)  // this is for development
     res.redirect(`https://shopsphere-80d1.onrender.com/order-success/${order._id}`)
     res.status(200).json(order)
 })
