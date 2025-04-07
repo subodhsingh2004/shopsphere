@@ -34,7 +34,6 @@ const uploadOnCloudinary = async (localFilePath) => {
 const deleteCloudinary = async (id) => {
     try {
         const response = await cloudinary.uploader.destroy(id, { invalidate: true })
-        // console.log(response)
         return response
     } catch (error) {
         throw new ApiError(400, error.message)
