@@ -8,8 +8,8 @@ dotenv.config()
 const app = express();
 
 app.use(cors({
-  origin: 'https://shopsphere-80d1.onrender.com',
-  // origin: 'http://localhost:5173',
+  // origin: process.env.CORS_ORIGIN,
+  origin: 'http://localhost:5173',
   credentials: true
 }))
 

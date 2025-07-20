@@ -13,14 +13,14 @@ export const userSignup = async (username, email, password) => {
     }
 }
 
-export const userSignupVerification = async (email, otp) => {
-    try {
-        const response = api.post('/signup/otp-verification', { email, otp })
-        return response
-    } catch (error) {
-        throw error
-    }
-}
+// export const userSignupVerification = async (email, otp) => {
+//     try {
+//         const response = api.post('/signup/otp-verification', { email, otp })
+//         return response
+//     } catch (error) {
+//         throw error
+//     }
+// }
 
 export const userLogin = async (email, password) => {
     try {
@@ -44,7 +44,7 @@ export const userInfoUpdate = async (userId, username, phoneNumber, streetAdress
     try {
         const response = api.put(
             '/update',
-            {userId, username, phoneNumber, streetAdress, pinCode, city, state}
+            { userId, username, phoneNumber, streetAdress, pinCode, city, state }
         )
         return response
     } catch (error) {

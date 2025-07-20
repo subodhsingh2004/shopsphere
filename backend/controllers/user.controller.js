@@ -1,10 +1,6 @@
 import { User } from "../models/UserModel.js";
-import { sendOTPEmail } from "../services/emailService.js";
-import { generateOTP } from "../services/OTPservice.js";
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/AsyncHandler.js";
-
-let user;
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
@@ -34,47 +30,59 @@ const userSignup = asyncHandler(async function (req, res) {
     })
 
     if (isUserExisted) {
-        throw new ApiError(404, "User already exists")
+        throw new ApiError(400, "User already exists")
     }
 
     // create otp and send to user
-    const otp = generateOTP(email)
-    await sendOTPEmail(username, otp, email)
+    // const otp = generateOTP(email)
+    // const emailResponse = await sendOTPEmail(username, otp, email)
 
-    user = new User({
+
+    const user = new User({
         username,
         email,
         password
     })
 
-    // if (!newUser) {
-    //     throw new ApiError(500, "Something went wrong")
-    // }
 
-    // const userData = await User.findById(newUser._id).select("-password -refreshToken")
+    try {
+        await user.save();
+    } catch (err) {
+        if (err.name === "ValidationError") {
+            const errors = Object.values(err.errors)[0].message
+            throw new ApiError(400, "Validation failed", errors);
+        }
 
-    res.status(200).json({ message: "OTP has been sent to your email" })
-})
-
-const userSignupVerification = asyncHandler(async function (req, res) {
-    await user.save()
-
-    req.user = user
-
-    // generate token
-    const token = await generateAccessAndRefreshToken(user._id)
-
-    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
-
-    const options = {
-        httpOnly: true,
-        secure: true
+        throw new ApiError(500, "Unexpected error while saving user");
     }
 
-    res.status(200)
-        .cookie("token", token.accessToken, options)
-        .json(loggedInUser)
+
+    if (!user) {
+        throw new ApiError(500, "Error in registering user")
+    }
+
+    res.status(200).json({ message: "success" })
 })
+
+// const userSignupVerification = asyncHandler(async function (req, res) {
+//     await user.save()
+
+//     req.user = user
+
+//     // generate token
+//     const token = await generateAccessAndRefreshToken(user._id)
+
+//     const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+
+//     const options = {
+//         httpOnly: true,
+//         secure: true
+//     }
+
+//     res.status(200)
+//         .cookie("token", token.accessToken, options)
+//         .json(loggedInUser)
+// })
 
 const userLogin = asyncHandler(async function (req, res) {
     const { email, password } = req.body
@@ -151,4 +159,4 @@ const userOrders = asyncHandler(async function (req, res) {
     res.status(200).json(userOrders)
 })
 
-export { userSignup, userSignupVerification, userLogin, editUserInfo, logoutUser, userOrders }
+export { userSignup, userLogin, editUserInfo, logoutUser, userOrders }

@@ -2,6 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt"
 import { AdressSchema } from "./AddressModel.js";
 import jwt from "jsonwebtoken"
+import { ApiError } from "../utils/ApiError.js";
 
 const userSchema = new Schema({
     username: {
@@ -28,9 +29,11 @@ const userSchema = new Schema({
         required: [true, "Password is required"],
         validate: {
             validator: function (v) {
-                return v.length >= 8;
+                if (v.length < 8) {
+                    throw new ApiError(500,'Password_Length_Error', "Password length must be 8");
+                }
+                return true;
             },
-            message: 'Password length must be 8'
         }
     },
     address: {
