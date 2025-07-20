@@ -30,7 +30,7 @@ const userSchema = new Schema({
         validate: {
             validator: function (v) {
                 if (v.length < 8) {
-                    throw new ApiError(500,'Password_Length_Error', "Password length must be 8");
+                    throw new ApiError(500, "Password length must be 8", "Password_Length_Error");
                 }
                 return true;
             },
