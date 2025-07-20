@@ -50,7 +50,7 @@ const userSignup = asyncHandler(async function (req, res) {
     } catch (err) {
         if (err.name === "ValidationError") {
             const errors = Object.values(err.errors)[0].message
-            throw new ApiError(400, "Validation failed", errors);
+            throw new ApiError(400, errors, "Validation failed");
         }
 
         throw new ApiError(500, "Unexpected error while saving user");

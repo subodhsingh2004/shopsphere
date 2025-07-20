@@ -6,16 +6,15 @@ import { toast } from "react-toastify"
 import Loader from "../components/Loader.jsx"
 import OtpInput from "../components/OtpInput.jsx"
 import { login } from "../slices/userSlice.js"
-import axios from "axios"
 
 function Signup() {
 
     const dispatch = useDispatch()
 
     const navigate = useNavigate()
-    const [username, setUsername] = useState("one")
-    const [email, setEmail] = useState("one@one.com")
-    const [password, setPassword] = useState("oneoneone")
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     const [loadingStatus, setLoadingStatus] = useState(false)
     const [otpFormStatus, setOtpFormStatus] = useState(false)
