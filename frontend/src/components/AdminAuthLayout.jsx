@@ -9,7 +9,12 @@ export default function Protected({ children, authentication = true }) {
     const navigate = useNavigate()
     const [loader, setLoader] = useState(true)
     const isLoggedIn = useSelector(state => state.user.isLoggedIn)
+    if (!isLoggedIn) {
+        navigate('/')
+        toast.error('Login required!')
+    }
     const userRole = useSelector(state => state.user.userDetails.role)
+    console.log(userRole)
     const hasToastFired = useRef(false);
 
     useEffect(() => {

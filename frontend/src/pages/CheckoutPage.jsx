@@ -21,7 +21,9 @@ function CheckoutPage() {
             products,
             user
         })
-        
+
+        console.log(user.phoneNumber)
+
         const options = {
             key: import.meta.env.VITE_RAZORPAY_KEY, // Enter the Key ID generated from the Dashboard
             amount: response.data.razorpayOrder.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -40,7 +42,7 @@ function CheckoutPage() {
                 address: "Razorpay Corporate Office"
             },
             theme: {
-                color: "#3772ff"
+                color: "#ffd400"
             }
         };
 

@@ -13,6 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setProductsInCart } from '../slices/cartSlice.js';
 import { toast } from 'react-toastify'
 import { userLogout } from '../services/authApi.js';
+import { getUserDetails } from '../services/userApi.js';
+import { setUserDetails } from '../slices/userSlice.js';
 // import HomeIcon from '@mui/icons-material/Home';
 
 function Navbar() {
@@ -38,9 +40,18 @@ function Navbar() {
         setProducts(productLists.data)
         dispatch(setProductsInCart(productLists.data))
     }
+    const getUserFromDB = async () => {
+        const userInfo = await getUserDetails(userDetails._id)
+        if (userInfo.data) {
+            dispatch(setUserDetails(userInfo.data))
+        }
+    }
 
     useEffect(() => {
-        if (isLoggedIn) getCartProducts()
+        if (isLoggedIn) {
+            getUserFromDB()
+            getCartProducts()
+        }
     }, [])
 
     const handleLogoClick = () => {
@@ -167,7 +178,7 @@ function Navbar() {
                 </div>
 
                 <div className='w-full flex justify-between'>
-                        <button onClick={handleLogoClick} className='font-[cookie] text-[30px] text-[#3772ff]'>Shop<span className='text-[#f8d525]'>Sphere</span></button>
+                    <button onClick={handleLogoClick} className='font-[cookie] text-[30px] text-[#3772ff]'>Shop<span className='text-[#f8d525]'>Sphere</span></button>
                     <div className='flex space-x-2'>
                         <ul className='flex items-center space-x-1'>
                             <li>

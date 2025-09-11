@@ -18,12 +18,16 @@ const userSlice = createSlice({
             state.userDetails = action.payload
             state.isLoggedIn = true
             sessionStorage.setItem("user", JSON.stringify(action.payload))
-
+            
         },
         logout: (state) => {
             state.userDetails = {}
             state.isLoggedIn = false
             sessionStorage.clear("user")
+        },
+        setUserDetails: (state, action) => {
+            state.userDetails = action.payload
+            sessionStorage.setItem("user", JSON.stringify(action.payload))
         },
         update: (state, action) => {
             state.userDetails = action.payload
@@ -33,4 +37,4 @@ const userSlice = createSlice({
 })
 
 export default userSlice.reducer
-export const { login, logout, update } = userSlice.actions
+export const { login, logout, setUserDetails, update } = userSlice.actions

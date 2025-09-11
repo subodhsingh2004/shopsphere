@@ -44,10 +44,12 @@ const userSignup = asyncHandler(async function (req, res) {
         password
     })
 
+    console.log(user)
 
     try {
         await user.save();
     } catch (err) {
+        console.error(err);
         if (err.name === "ValidationError") {
             const errors = Object.values(err.errors)[0].message
             throw new ApiError(400, errors, "Validation failed");
@@ -123,6 +125,16 @@ const logoutUser = asyncHandler(async function (req, res) {
     res.status(200).send({ message: "Logged out successfully" })
 })
 
+const getUserInfo = asyncHandler(async function (req, res) {
+    const {userId} = req.params
+    if (!userId) throw new ApiError(400, "User id is required")
+
+    const userInfo = await User.findById(userId).select("-password -refreshToken -orderHistory")
+    if (!userInfo) throw new ApiError(404, "User not found")
+
+    res.status(200).json(userInfo)
+})
+
 const editUserInfo = asyncHandler(async function (req, res) {
     const { userId, username, phoneNumber, streetAdress, pinCode, city, state } = req.body
 
@@ -159,4 +171,4 @@ const userOrders = asyncHandler(async function (req, res) {
     res.status(200).json(userOrders)
 })
 
-export { userSignup, userLogin, editUserInfo, logoutUser, userOrders }
+export { userSignup, userLogin, getUserInfo, editUserInfo, logoutUser, userOrders }

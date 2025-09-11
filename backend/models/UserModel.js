@@ -22,7 +22,6 @@ const userSchema = new Schema({
     phoneNumber: {
         type: String,
         unique: [true, "Phone number should be unique"],
-        default: ""
     },
     password: {
         type: String,

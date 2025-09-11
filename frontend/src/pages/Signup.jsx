@@ -80,48 +80,41 @@ function Signup() {
                     {/* <p className="text-xs lg:text-sm text-gray-300">Explore, Discover, Shop ~ All in the Sphere</p> */}
                 </div>
 
-                {
-                    otpFormStatus ?
 
-                        <div className='w-auto h-auto bg-[#191919] rounded-2xl border border-[#292929] flex flex-col items-center p-6 space-y-5'>
-                            <h1 className='text-gray-400 text-center leading-5'>Enter 6 Digit OTP sent to <br /> testuser@test.com</h1>
-                            <OtpInput length={6} submitOtp={handleOTPSubmit} />
-                        </div> :
 
-                        <div className="w-[300px] sm:w-[350px] h-auto shadow-2xl bg-[#191919] border border-[#292929] rounded-2xl flex flex-col items-center py-10 px-6">
+                <div className="w-[300px] sm:w-[350px] h-auto shadow-2xl bg-[#191919] border border-[#292929] rounded-2xl flex flex-col items-center py-10 px-6">
 
-                            <div className="space-y-3 flex flex-col items-center">
-                                <h1 className="text-[20px] font-bold text-white">Get started</h1>
+                    <div className="space-y-3 flex flex-col items-center">
+                        <h1 className="text-[20px] font-bold text-white">Get started</h1>
 
-                                <h2 className="text-sm text-gray-500">Already have an account? <button onClick={handleNavigate} className="text-[#3772ff] font-medium cursor-pointer">Login</button></h2>
+                        <h2 className="text-sm text-gray-500">Already have an account? <button onClick={handleNavigate} className="text-[#3772ff] font-medium cursor-pointer">Login</button></h2>
+                    </div>
+
+                    <div className="w-full mt-10">
+                        <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
+
+                            <div className="transition-all duration-300 w-full h-[50px] bg-[#303030] py-1 rounded-md group focus-within:bg-[#292929]">
+                                <label className="text-sm font-medium pl-2 absolute select-none text-gray-400 group-focus-within:text-gray-300">Username</label>
+                                <input required value={username} onChange={(e) => setUsername(e.target.value)} type="text" className="w-full h-full px-2 mt-2 outline-none text-sm text-white" />
                             </div>
 
-                            <div className="w-full mt-10">
-                                <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
-
-                                    <div className="transition-all duration-300 w-full h-[50px] bg-[#303030] py-1 rounded-md group focus-within:bg-[#292929]">
-                                        <label className="text-sm font-medium pl-2 absolute select-none text-gray-400 group-focus-within:text-gray-300">Username</label>
-                                        <input required value={username} onChange={(e) => setUsername(e.target.value)} type="text" className="w-full h-full px-2 mt-2 outline-none text-sm text-white" />
-                                    </div>
-
-                                    <div className="transition-all duration-300 w-full h-[50px] bg-[#303030] py-1 rounded-md group focus-within:bg-[#292929]">
-                                        <label className="text-sm font-medium pl-2 absolute select-none text-gray-400 group-focus-within:text-gray-300">Email</label>
-                                        <input required value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="w-full h-full px-2 mt-2 outline-none text-sm text-white" />
-                                    </div>
-
-                                    <div className="transition-all duration-300 w-full h-[50px] bg-[#303030] py-1 rounded-md group focus-within:bg-[#292929]">
-                                        <label className="text-sm font-medium pl-2 absolute select-none text-gray-400 group-focus-within:text-gray-300">Password</label>
-                                        <input required value={password} min={8} onChange={(e) => setPassword(e.target.value)} type="password" className="w-full h-full px-2 mt-2 outline-none text-sm text-white" />
-                                    </div>
-
-                                    <button className="bg-[#3772ff] py-2 rounded-md text-white font-bold cursor-pointer hover:bg-[#2361d1]">Create account</button>
-
-                                </form>
+                            <div className="transition-all duration-300 w-full h-[50px] bg-[#303030] py-1 rounded-md group focus-within:bg-[#292929]">
+                                <label className="text-sm font-medium pl-2 absolute select-none text-gray-400 group-focus-within:text-gray-300">Email</label>
+                                <input required value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="w-full h-full px-2 mt-2 outline-none text-sm text-white" />
                             </div>
 
-                        </div>
+                            <div className="transition-all duration-300 w-full h-[50px] bg-[#303030] py-1 rounded-md group focus-within:bg-[#292929]">
+                                <label className="text-sm font-medium pl-2 absolute select-none text-gray-400 group-focus-within:text-gray-300">Password</label>
+                                <input required value={password} min={8} onChange={(e) => setPassword(e.target.value)} type="password" className="w-full h-full px-2 mt-2 outline-none text-sm text-white" />
+                            </div>
 
-                }
+                            <button className="bg-[#3772ff] py-2 rounded-md text-white font-bold cursor-pointer hover:bg-[#2361d1]">Create account</button>
+
+                        </form>
+                    </div>
+
+                </div>
+
 
             </div>
             <Loader isActive={loadingStatus} />

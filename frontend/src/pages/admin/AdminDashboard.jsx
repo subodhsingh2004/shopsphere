@@ -87,8 +87,6 @@ function AdminDashboard() {
                         }
                     </div>
 
-                    <div className='hidden lg:flex rounded-md outline dark:outline-0 outline-gray-200 h-full w-[22%] dark:bg-[#121212]'></div>
-
                 </div>
 
             </div>
