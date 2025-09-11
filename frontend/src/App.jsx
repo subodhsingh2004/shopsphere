@@ -22,11 +22,6 @@ function App() {
     document.body.classList.add(themeMode)
   }, [themeMode])
 
-  useEffect(() => {
-    const token = sessionStorage.getItem("token")
-  }, [])
-
-
   return (
     <>
       <ThemeProvider value={{ lightTheme, darkTheme, themeMode }}>
