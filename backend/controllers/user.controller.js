@@ -44,8 +44,6 @@ const userSignup = asyncHandler(async function (req, res) {
         password
     })
 
-    console.log(user)
-
     try {
         await user.save();
     } catch (err) {

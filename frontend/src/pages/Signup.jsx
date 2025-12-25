@@ -45,7 +45,6 @@ function Signup() {
             }
         } catch (error) {
             setLoadingStatus(false)
-            console.log(error)
             toast.error(error.response.data.error)
         }
 

@@ -50,7 +50,6 @@ function AddProductPage() {
             if (response) {
                 setLoadingStatus(false)
                 toast.success("Product added successfully")
-                console.log(response.data)
 
                 // clear the form
                 setProductName("")
@@ -63,7 +62,6 @@ function AddProductPage() {
             }
         } catch (error) {
             setLoadingStatus(false)
-            console.log(error)
             toast.error(error?.response.data.error)
         }
     }

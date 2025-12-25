@@ -14,7 +14,6 @@ export default function Protected({ children, authentication = true }) {
         toast.error('Login required!')
     }
     const userRole = useSelector(state => state.user.userDetails.role)
-    console.log(userRole)
     const hasToastFired = useRef(false);
 
     useEffect(() => {

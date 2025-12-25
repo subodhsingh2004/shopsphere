@@ -44,7 +44,6 @@ const cartSlice = createSlice({
         },
         removeProductOfCart: (state, action) => {
             const { _id } = action.payload
-            // console.log(_id)
             state.products = state.products.filter(product => product._id != _id)
 
             const totalQuantity = calculateNumberOfProduct(state.products)

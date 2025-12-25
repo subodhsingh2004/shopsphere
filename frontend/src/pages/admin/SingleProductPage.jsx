@@ -64,7 +64,6 @@ function SingleProductPage() {
             setLoadingStatus(true)
 
             const response = await deleteProduct(product._id)
-            console.log(response.data)
 
             if (response.data) {
                 setLoadingStatus(false)

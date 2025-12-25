@@ -6,9 +6,6 @@ const api = axios.create({
 
 export const addProduct = async (formData) => {
 
-
-    console.log(formData.get('file'))
-
     try {
         const addedProduct = api.post(
             '/add-product',

@@ -26,7 +26,6 @@ export const generateOTP = (email) => {
 
 export const verifyOTP = (OTP, email) => {
     const otpInfo = otps[email]   
-    console.log(otpInfo) 
  
     if(!otpInfo){
         throw new ApiError(403, "OTP not found")

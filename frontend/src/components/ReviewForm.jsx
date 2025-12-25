@@ -37,7 +37,6 @@ function ReviewForm({ isActive, closeFunction, productId, getReviews }) {
             }
             else toast.error('An error occured, please try again')
         } catch (error) {
-            console.log(error)
             toast.error('An error occured, please try again')
         }
     }

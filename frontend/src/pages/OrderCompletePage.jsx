@@ -32,7 +32,6 @@ function OrderCompletePage() {
         const headers = ['Item', 'Quantity', 'Price', 'Total'];
 
         // Table rows (Itemized list)
-        console.log(order)
         const data = order.items.map(item => [
             item.productId.name,
             String(item.quantity),
