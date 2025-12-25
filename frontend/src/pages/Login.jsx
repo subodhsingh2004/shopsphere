@@ -26,7 +26,7 @@ function Login() {
     try {
       const response = await userLogin(email, password)
       if (response) {
-        dispatch(login(response.data))
+        dispatch(login(response.data.user))
         setLoadingStatus(false)
         toast.success("Login successfully")
         setEmail("")

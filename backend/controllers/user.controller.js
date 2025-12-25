@@ -61,7 +61,20 @@ const userSignup = asyncHandler(async function (req, res) {
         throw new ApiError(500, "Error in registering user")
     }
 
-    res.status(200).json({ message: "success" })
+    const token = await generateAccessAndRefreshToken(user._id)
+
+    // userdetails to send as response
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+    res.status(200)
+        .cookie("token", token.accessToken, options)
+        .json({ message: "success" , user: loggedInUser})
+
 })
 
 // const userSignupVerification = asyncHandler(async function (req, res) {
@@ -114,7 +127,7 @@ const userLogin = asyncHandler(async function (req, res) {
 
     res.status(200)
         .cookie("token", token.accessToken, options)
-        .json(loggedInUser)
+        .json({ message: "Login successful", user: loggedInUser })
 })
 
 // Logout a User

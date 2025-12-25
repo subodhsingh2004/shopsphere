@@ -68,7 +68,8 @@ const getCurrentMonthSalesData = asyncHandler(async function (req, res) {
     const salesData = await Order.aggregate([
         {
             $match: {
-                createdAt: { $gte: firstDay, $lte: lastDay }
+                createdAt: { $gte: firstDay, $lte: lastDay },
+                orderStatus: "Completed"
             }
         },
         {

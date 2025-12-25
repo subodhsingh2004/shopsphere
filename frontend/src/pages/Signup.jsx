@@ -40,7 +40,7 @@ function Signup() {
                 toast.success("User registerd successfully")
                 setLoadingStatus(false)
 
-                dispatch(login(response.data))
+                dispatch(login(response.data.user))
 
             }
         } catch (error) {

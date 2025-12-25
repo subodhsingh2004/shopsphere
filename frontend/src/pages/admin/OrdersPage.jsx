@@ -69,7 +69,7 @@ function OrdersPage() {
                             <img src={product.productId.image} className='h-[50px] rounded-md' alt={product.productId.name} />
                             <span className='text-black dark:text-white text-sm text-start leading-none md:text-[16px]'>{product.productId.name}</span>
                           </div>
-                          <div className='w-[14%] h-full flex justify-center items-center text-black dark:text-white text-sm leading-none font-medium truncate'>{order.customer.username}</div>
+                          <div className='w-[14%] h-full flex justify-center items-center text-black dark:text-white text-sm leading-none font-medium truncate'>{order.customer?.username || "N/A"}</div>
                           <div className='w-[14%] h-full flex justify-center items-center text-black dark:text-white text-sm leading-none md:text-lg font-medium'>₹ {product.productId.price}</div>
                           <div className='w-[14%] h-full flex justify-center items-center text-black dark:text-white text-sm leading-none md:text-lg font-medium'>{product.quantity}</div>
                           <div className='w-[14%] h-full flex justify-center items-center text-black dark:text-white text-sm leading-none font-medium'>{formatDate(order.createdAt)}</div>
