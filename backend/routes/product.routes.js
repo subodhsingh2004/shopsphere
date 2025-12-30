@@ -3,8 +3,17 @@ import { addProduct, deleteProduct, getAllProducts, getLatestProduct, getMostSel
 import { upload } from "../middlewares/FileHandler.js";
 import { verifyJWT } from "../middlewares/verifyJWT.js";
 
+const limiter = (maxRequests) => rateLimit({
+    windowMs: 60 * 1000,
+    max: maxRequests,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { status: 429, message: "Too many requests, Please try again later." }
+});
+
 const router = Router()
 
+router.use(limiter(40));
 router.route("/add-product").post(upload.single('file'), verifyJWT, addProduct);
 router.route("/product-search").get(searchProduct);
 router.route("/get-all-products").get(getAllProducts);

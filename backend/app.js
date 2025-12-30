@@ -9,16 +9,6 @@ dotenv.config()
 
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minutes
-  max: 5, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-  message: { status: 429, message: "Too many requests, please try again later." }
-});
-
-app.use(limiter);
-
 app.use(cors({
   origin: process.env.CORS_ORIGIN,
   credentials: true
