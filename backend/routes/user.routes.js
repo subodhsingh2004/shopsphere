@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { editUserInfo, getUserInfo, logoutUser, userLogin, userOrders, userSignup } from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/verifyJWT.js"
+import rateLimit from "express-rate-limit";
+
 
 const limiter = rateLimit({
   windowMs: 60 * 1000, 

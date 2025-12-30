@@ -3,7 +3,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser"
 import dotenv from "dotenv";
 import path from 'path'
-import rateLimit from "express-rate-limit";
 
 dotenv.config()
 

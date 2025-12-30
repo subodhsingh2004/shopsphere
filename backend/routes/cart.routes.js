@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { addProductToCart, getProductsOfCart, removeProductsOfCart, updateProductsOfCart } from "../controllers/cart.controller.js";
 import { verifyJWT } from "../middlewares/verifyJWT.js";
+import rateLimit from "express-rate-limit";
+
 
 const limiter = (maxRequests) => rateLimit({
     windowMs: 60 * 1000,

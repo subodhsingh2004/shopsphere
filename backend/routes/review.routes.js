@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { addReview, getReviews } from '../controllers/review.controller.js';
+import rateLimit from "express-rate-limit";
 
 
 const limiter = rateLimit({

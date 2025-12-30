@@ -1,5 +1,7 @@
 import { Router } from 'express'
 import { getCurrentMonthSalesData, getLastSixMonthSalesData, getTotalOrders, getTotalSales, getTotalCustomers, getSalesByCategory, getOutofStockProducts } from '../controllers/admin.controller.js'
+import rateLimit from "express-rate-limit";
+
 
 const limiter = (maxRequests) => rateLimit({
     windowMs: 60 * 1000,

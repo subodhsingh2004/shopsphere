@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { addNewOrder, checkout, generateReceipt, paymentVerification } from "../controllers/order.controller.js";
 import { verifyJWT } from "../middlewares/verifyJWT.js";
+import rateLimit from "express-rate-limit";
+
 
 const limiter = (maxRequests) => rateLimit({
     windowMs: 60 * 1000,

@@ -2,6 +2,8 @@ import { Router } from "express";
 import { addProduct, deleteProduct, getAllProducts, getLatestProduct, getMostSellingProduct, getProductsByCategory, getSingleProduct, searchProduct, updateProduct } from "../controllers/product.controller.js";
 import { upload } from "../middlewares/FileHandler.js";
 import { verifyJWT } from "../middlewares/verifyJWT.js";
+import rateLimit from "express-rate-limit";
+
 
 const limiter = (maxRequests) => rateLimit({
     windowMs: 60 * 1000,
